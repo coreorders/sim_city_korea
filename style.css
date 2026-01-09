@@ -27,6 +27,27 @@ body {
     z-index: 1;
 }
 
+/* 데이터 출처 배너 */
+.data-source-banner {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 4px 12px;
+    color: #aaa;
+    font-size: 0.65rem;
+    font-weight: 400;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+
 /* 상단 가로 메뉴 바 */
 .sidebar {
     position: absolute;
