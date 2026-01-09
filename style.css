@@ -1,0 +1,111 @@
+:root {
+    --bg-color: #0d1117;
+    --panel-bg: rgba(22, 27, 34, 0.8);
+    --accent-color: #ffd700;
+    --text-color: #c9d1d9;
+    --danger-color: #f85149;
+    --glass-border: rgba(255, 255, 255, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+#map {
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+}
+
+/* 상단 가로 메뉴 바 */
+.sidebar {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 10px;
+    pointer-events: none;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: row;
+    /* 가로 배치 강제 */
+    gap: 6px;
+    pointer-events: auto;
+    overflow-x: auto;
+    padding: 5px 0;
+    width: 100%;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.menu-list::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari */
+}
+
+.menu-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #888;
+    font-size: 0.7rem;
+    font-weight: 500;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.menu-item.active {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.header,
+.mobile-toggle,
+.icon {
+    display: none !important;
+}
+
+/* Leaflet Overrides */
+.leaflet-control-zoom {
+    margin-bottom: 20px !important;
+    margin-right: 15px !important;
+    border: none !important;
+}
+
+.leaflet-bar a {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    color: #fff !important;
+    border: 1px solid var(--glass-border) !important;
+    backdrop-filter: blur(10px);
+}
