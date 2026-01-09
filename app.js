@@ -76,5 +76,53 @@ function selectCategory(layerId, element) {
     }).addTo(map);
 }
 
+// 현재 위치로 이동
+function goToCurrentLocation() {
+    if (!navigator.geolocation) {
+        alert('이 브라우저는 위치 정보를 지원하지 않습니다.');
+        return;
+    }
+
+    const locationBtn = document.getElementById('locationBtn');
+    locationBtn.textContent = '⏳';
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const { latitude, longitude } = position.coords;
+            map.setView([latitude, longitude], 15);
+            locationBtn.textContent = '📍';
+            
+            // 현재 위치에 마커 표시 (선택사항)
+            L.marker([latitude, longitude])
+                .addTo(map)
+                .bindPopup('현재 위치')
+                .openPopup();
+        },
+        (error) => {
+            locationBtn.textContent = '📍';
+            let errorMsg = '위치를 가져올 수 없습니다.';
+            
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMsg = '위치 권한이 거부되었습니다.';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMsg = '위치 정보를 사용할 수 없습니다.';
+                    break;
+                case error.TIMEOUT:
+                    errorMsg = '위치 요청 시간이 초과되었습니다.';
+                    break;
+            }
+            
+            alert(errorMsg);
+        }
+    );
+}
+
 // 페이지 로드 시 시작
-window.onload = initMap;
+window.onload = function() {
+    initMap();
+    
+    // 현재 위치 버튼 이벤트
+    document.getElementById('locationBtn').addEventListener('click', goToCurrentLocation);
+};
